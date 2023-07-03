@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Management System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Project Management System</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" th:href="@{/projects}">Project Management</a>-->
+<!--            </li>-->
+        </ul>
+    </div>
+    <a th:href="@{/logout}" class="btn btn-light my-2 my-sm-0" type="submit">Logout</a>
+</nav>
+<br>
+<br>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <form th:action="@{/projects/inDateRange}" th:object="${projectDtls}" method="POST">
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input
+                            type="date"
+                            name="start"
+                            class="form-control"
+                            placeholder="Enter Start Date"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label>End Date</label>
+                    <input
+                            type="date"
+                            name="end"
+                            class="form-control"
+                            placeholder="Enter End Date"
+                    />
+                </div>
+                <button type="submit" class="btn btn-primary">Find</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:if="${session.successmessage}"
+     th:classappend="${session.successmessage}" class="alert alert-success" role="alert">
+
+    <p th:text="${session.successmessage}"></p>
+    <th:block th:text="${#session.removeAttribute('successmessage')}"></th:block>
+</div>
+
+<div th:if="${session.failuremessage}"
+     th:classappend="${session.failuremessage}" class="alert alert-danger error" role="alert">
+
+    <p th:text="${session.failuremessage}"></p>
+    <th:block th:text="${#session.removeAttribute('failuremessage')}"></th:block>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <h1>List Projects</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/projects/new}" class="btn btn-primary btn-sm mb-3">Add Project</a>
+<!--            <a th:href="@{/projects/reportDateRange}" class="btn btn-primary btn-sm mb-3">Generate Report</a>-->
+            <a th:href="@{/projects/report}" class="btn btn-primary btn-sm mb-3">Generate Report</a>
+        </div>
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Project Name</th>
+                <th>Project Owner</th>
+<!--                <th>Project Status</th>-->
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>No. of Members</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="project: ${projects}">
+                <td th:text="${project.name}"></td>
+                <td th:text="${project.owner_name}"></td>
+<!--                <td th:text="${project.status}"></td>-->
+                <td th:text="${project.start}"></td>
+                <td th:text="${project.end}"></td>
+                <td th:text="${project.numberOfProjectMembers}"></td>
+                <td>
+                    <a th:href="@{/projects/projectView/{id}(id=${project.id})}"
+                       class="btn btn-primary">View</a>
+
+                    <a th:href="@{/projects/edit/{id}(id=${project.id})}"
+                       class="btn btn-primary">Edit</a>
+
+                    <a th:href="@{/projects/addMember/{id}(id=${project.id})}"
+                       class="btn btn-primary">Add Member</a>
+
+                    <a th:href="@{/projects/delete/{id}(id=${project.id})}" id="btnDelete"
+                       class="btn btn-danger btn-delete">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="confirmModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <span id="confirmText"></span>
+            </div>
+
+            <div class="modal-footer">
+                <a type="button" id="yesBtn" class="btn btn-danger">Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".btn-delete").on("click", function (e) {
+            e.preventDefault();
+            link = $(this);
+
+            $("#yesBtn").attr("href", link.attr("href"));
+            $("#confirmText").html("Do you want to delete the Project?");
+            $("#confirmModal").modal();
+        });
+    });
+</script>
+
+
+</body>
+</html>
