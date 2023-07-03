@@ -1,5 +1,5 @@
 # Project-Management-System-CRUD-Application
-This is a CRUD application developed using Java Spring Boot as backend, Thymeleaf as frontend, and MySql for the database.
+This is a CRUD application developed using Java Spring Boot as backend, Thymeleaf as frontend, and MySQL for the database.
 
 &nbsp;
 
@@ -15,6 +15,24 @@ This is a CRUD application developed using Java Spring Boot as backend, Thymelea
 
 
 &nbsp;
+
+
+**Steps to run the program in localhost -**
+
+1. Download and install java jdk (Preferably java 8)
+2. Download and Install Apache Maven
+3. Download and Install Apache Tomcat
+4. Download and Install MySQL Workbench and set it up using a password. Create a schema named pmsdb
+5. Open the project using any IDE
+6. Open the application.properties file and set the spring.datasource.password to the same password used to set up the MySQL server
+7. Install the required Maven dependencies
+8. Run the project
+
+&nbsp;
+
+**API calls -**
+1. To get the list of all the projects in json format - http://localhost:8080/GET/api/v1/projects
+2. To ge the list of all the porjects in html page - http://localhost:8080/GET/api/v1/projectshtml
 
 
 
