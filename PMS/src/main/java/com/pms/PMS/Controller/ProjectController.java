@@ -1,7 +1,9 @@
 package com.pms.PMS.Controller;
 
+import com.pms.PMS.Entity.DateConv;
 import com.pms.PMS.Entity.ProjectDtls;
 import com.pms.PMS.Entity.UserDtls;
+import com.pms.PMS.Repository.ProjectRepository;
 import com.pms.PMS.Service.ProjectService;
 import com.pms.PMS.Service.ReportService;
 import com.pms.PMS.Service.UserService;
@@ -19,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +41,9 @@ public class ProjectController {
 
     @Autowired
     private ReportService reportService;
+
+    @Autowired
+    private ProjectRepository projectRepository;
 
 
     public ProjectController(ProjectService projectService) {
@@ -293,19 +300,19 @@ public class ProjectController {
     }
 
 
-    @GetMapping("/projects/report")
-    public String generateReport(HttpSession session)
-            throws JRException, FileNotFoundException {
-        try {
-            reportService.exportReport();
-            session.setAttribute("successmessage", "Report Successfully Generated...");
-            return "redirect:/projects";
-        }catch (Exception e)
-        {
-            session.setAttribute("failuremessage", "Report Could not be Generated...");
-            return "redirect:/projects";
-        }
-    }
+//    @GetMapping("/projects/report")
+//    public String generateReport(HttpSession session)
+//            throws JRException, FileNotFoundException {
+//        try {
+//            reportService.exportReport();
+//            session.setAttribute("successmessage", "Report Successfully Generated...");
+//            return "redirect:/projects";
+//        }catch (Exception e)
+//        {
+//            session.setAttribute("failuremessage", "Report Could not be Generated...");
+//            return "redirect:/projects";
+//        }
+//    }
 
 
     @GetMapping("/projects/reportDateRange")
@@ -322,30 +329,19 @@ public class ProjectController {
         return "api_projects_list";
     }
 
+    @PostMapping("/projects/report")
+    public String generateReport(@ModelAttribute("dateConv") DateConv dateConv, HttpSession session)
+            throws JRException, FileNotFoundException {
+        try {
+            reportService.exportReport(dateConv.getStart(), dateConv.getEnd());
+            session.setAttribute("successmessage", "Report Successfully Generated...");
+            return "redirect:/projects";
+        } catch (Exception e) {
+            session.setAttribute("failuremessage", "Report Could not be Generated...");
+            return "redirect:/projects";
+        }
+    }
+
 }
-
-
-
-
-//    @PostMapping("/projects/report")
-//    public String generateReport(@RequestParam("start") String startDate,
-//                                 @RequestParam("end") String endDate, HttpSession session)
-//            throws JRException, FileNotFoundException {
-//        try {
-//            System.out.println("HERE");
-////            Date start = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy").parse(startDate);
-////            Date end = new SimpleDateFormat("yyyy/MM/dd").parse(endDate);
-//
-//            System.out.println(startDate);
-//            System.out.println(endDate);
-////            reportService.exportReport(start, end);
-//            session.setAttribute("successmessage", "Report Successfully Generated...");
-//            return "redirect:/projects";
-//        }catch (Exception e)
-//        {
-//            session.setAttribute("failuremessage", "Report Could not be Generated...");
-//            return "redirect:/projects";
-//        }
-//    }
 
 

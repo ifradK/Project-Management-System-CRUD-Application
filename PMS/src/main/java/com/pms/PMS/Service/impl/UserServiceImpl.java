@@ -33,4 +33,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findUserDtlsByProjectDtlsId(id);
     }
 
+    @Override
+    public List<String> getAllUsernames() {
+        return userRepository.getAllUsernames();
+    }
+
 }

@@ -13,4 +13,6 @@ public interface UserService {
     UserDtls getUserByUsername(String nm);
 
     List<UserDtls> getMembersByProject(Long id);
+
+    List<String> getAllUsernames();
 }

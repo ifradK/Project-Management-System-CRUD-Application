@@ -2,6 +2,7 @@ package com.pms.PMS.Repository;
 
 import com.pms.PMS.Entity.UserDtls;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import javax.jws.soap.SOAPBinding;
 import java.time.LocalDateTime;
@@ -12,6 +13,8 @@ public interface UserRepository extends JpaRepository<UserDtls, Integer> {
 
     public UserDtls findByUsername(String nm);
 
-//    Set<UserDtls> findUserDtlsByProjectId(Long id);
     List<UserDtls> findUserDtlsByProjectDtlsId(Long id);
+
+    @Query("select username from UserDtls")
+    public List<String> getAllUsernames();
 }
