@@ -35,7 +35,12 @@ This is a CRUD application developed using Java Spring Boot as backend, Thymelea
 2. To ge the list of all the porjects in html page - http://localhost:8080/GET/api/v1/projectshtml
 
 
+@nbsp;
 
+**Software Versions -**
+1. Java JDK 8
+2. Apache Tomcat 9.0.67
+3. Apache Maven 3.9.2
 
 
 
