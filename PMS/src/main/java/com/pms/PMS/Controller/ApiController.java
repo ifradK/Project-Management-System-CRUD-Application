@@ -30,9 +30,6 @@ public class ApiController {
     }
 
     @GetMapping("/GET/api/users")
-//    @RequestMapping
-//    public List<String> getUserNames(@RequestParam(value = "term", required = false,
-//            defaultValue = "") String term)
     public List<String> getUserNames()
     {
         return userService.getAllUsernames();

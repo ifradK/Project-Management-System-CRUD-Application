@@ -102,7 +102,7 @@
                 <textElement textAlignment="Center">
                     <font size="14" isBold="true"/>
                 </textElement>
-                <text><![CDATA[No. of Project Members]]></text>
+                <text><![CDATA[Members]]></text>
             </staticText>
             <staticText>
                 <reportElement mode="Opaque" x="414" y="0" width="69" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ec6f7e93-3f41-4003-bb53-e93f42d05991">

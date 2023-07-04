@@ -10,7 +10,7 @@
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
   <!-- Brand -->
-  <a class="navbar-brand" href="#">Project Management System</a>
+  <a class="navbar-brand" th:href="@{/projects}"><h4>Project Management System</h4></a>
 
   <!-- Toggler/collapsibe Button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -20,9 +20,9 @@
   <!-- Navbar links -->
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/projects}">Project Management</a>
-      </li>
+<!--      <li class="nav-item">-->
+<!--        <a class="nav-link" th:href="@{/projects}">Project Management</a>-->
+<!--      </li>-->
     </ul>
   </div>
 </nav>
@@ -33,11 +33,13 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+      <br>
       <h1 class="text-center">Create New Project</h1>
+      <hr>
       <div class="card-body">
         <form th:action="@{/projects}" th:object="${project}" method="POST">
           <div class="form-group">
-            <label>Project Name</label>
+            <b><label>Project Name</label></b>
             <input
                     type="text"
                     name = "name"
@@ -48,7 +50,7 @@
           </div>
 
           <div class="form-group">
-            <label>Introduction</label>
+            <b><label>Introduction</label></b>
             <input
                     type="text"
                     name = "intro"
@@ -59,7 +61,7 @@
           </div>
 
           <div class="form-group">
-            <label>Status</label>
+            <b><label>Status</label></b>
             <input
                     type="number"
                     name = "status"
@@ -70,7 +72,7 @@
           </div>
 
           <div class="form-group">
-            <label>Start Date</label>
+            <b><label>Start Date</label></b>
             <input
                     type="date"
                     name = "start"
@@ -81,7 +83,7 @@
           </div>
 
           <div class="form-group">
-            <label>End Date</label>
+            <b><label>End Date</label></b>
             <input
                     type="date"
                     name = "end"

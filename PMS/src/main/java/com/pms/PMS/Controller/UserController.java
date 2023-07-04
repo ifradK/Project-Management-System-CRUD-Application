@@ -1,13 +1,10 @@
 package com.pms.PMS.Controller;
 
 import com.pms.PMS.Entity.UserDtls;
-import com.pms.PMS.Repository.UserRepository;
-import com.pms.PMS.Service.ProjectService;
 import com.pms.PMS.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +14,9 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class UserController {
 
+    @Autowired
+    private BCryptPasswordEncoder bp;
+
     private UserService userService;
 
     public UserController(UserService userService) {
@@ -24,20 +24,15 @@ public class UserController {
         this.userService = userService;
     }
 
-    @Autowired
-    private BCryptPasswordEncoder bp;
+
 
     @GetMapping("/")
     public String Home()
     {
-        return "register";
+        return "landing_page";
     }
 
-//    @GetMapping("/login")
-//    public String login()
-//    {
-//        return "login";
-//    }
+
 
     @GetMapping("/register")
     public String register()
@@ -46,13 +41,6 @@ public class UserController {
     }
 
 
-
-//    @PostMapping("/dologin")
-//    public void dologin(@ModelAttribute UserDtls u, HttpSession session)
-//    {
-//        System.out.println("FIRED");
-//        System.out.println(u);
-//    }
 
     @PostMapping("/register")
     public String register(@ModelAttribute UserDtls userDtls, HttpSession session)
@@ -70,5 +58,19 @@ public class UserController {
             return "redirect:/";
         }
     }
+
+
+    //    @GetMapping("/login")
+//    public String login()
+//    {
+//        return "login";
+//    }
+
+//    @PostMapping("/dologin")
+//    public void dologin(@ModelAttribute UserDtls u, HttpSession session)
+//    {
+//        System.out.println("FIRED");
+//        System.out.println(u);
+//    }
 
 }

@@ -3,7 +3,6 @@ package com.pms.PMS.Controller;
 import com.pms.PMS.Entity.DateConv;
 import com.pms.PMS.Entity.ProjectDtls;
 import com.pms.PMS.Entity.UserDtls;
-import com.pms.PMS.Repository.ProjectRepository;
 import com.pms.PMS.Service.ProjectService;
 import com.pms.PMS.Service.ReportService;
 import com.pms.PMS.Service.UserService;
@@ -15,14 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.soap.SOAPBinding;
 import java.io.FileNotFoundException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -42,14 +34,12 @@ public class ProjectController {
     @Autowired
     private ReportService reportService;
 
-    @Autowired
-    private ProjectRepository projectRepository;
-
 
     public ProjectController(ProjectService projectService) {
         super();
         this.projectService = projectService;
     }
+
 
 
     @GetMapping("/projects/new")
@@ -60,6 +50,8 @@ public class ProjectController {
         return "create_project";
     }
 
+
+
     @GetMapping("/projects")
     public String listProjects(Model model)
     {
@@ -68,13 +60,14 @@ public class ProjectController {
         Date startOfMonth = cal.getTime();
 
         int lastDateOfMonth = cal.getActualMaximum(Calendar.DATE);
-//        cal.set(Calendar.DATE, lastDateOfMonth);
         cal.set(Calendar.DAY_OF_MONTH, lastDateOfMonth);
         Date endOfMonth = cal.getTime();
 
         model.addAttribute("projects", projectService.getProjectsInDateRange(startOfMonth, endOfMonth));
         return "projects";
     }
+
+
 
     @PostMapping("/projects")
     public String saveProject(@ModelAttribute("project") ProjectDtls projectDtls, HttpSession session)
@@ -102,17 +95,16 @@ public class ProjectController {
     }
 
 
+
     @PostMapping("/projects/inDateRange")
     public String listProjectsInDateRange(@ModelAttribute ProjectDtls projectDtls, Model model)
     {
         Date startDate = projectDtls.getStart();
         Date endDate = projectDtls.getEnd();
-        System.out.println("KKK");
-        System.out.println(startDate);
-        System.out.println(endDate);
         model.addAttribute("projects", projectService.getProjectsInDateRange(startDate, endDate));
         return "projects";
     }
+
 
 
     @GetMapping("/projects/projectView/{id}")
@@ -121,6 +113,7 @@ public class ProjectController {
         model.addAttribute("project", projectService.getProjectById(id));
         return "view_project";
     }
+
 
 
     @GetMapping("/projects/edit/{id}")
@@ -149,6 +142,8 @@ public class ProjectController {
             return "redirect:/projects";
         }
     }
+
+
 
     @PostMapping("/projects/{id}")
     public String updateProject(@PathVariable Long id, @ModelAttribute("project") ProjectDtls projectDtls,
@@ -192,6 +187,7 @@ public class ProjectController {
     }
 
 
+
     @GetMapping("/projects/delete/{id}")
     public String deleteProject(@PathVariable Long id, HttpSession session){
 
@@ -226,6 +222,8 @@ public class ProjectController {
         return "redirect:/projects";
     }
 
+
+
     @GetMapping("/projects/addMember/{id}")
     public String addMemberForm(@PathVariable Long id, Model model, HttpSession session)
     {
@@ -254,6 +252,8 @@ public class ProjectController {
             return "redirect:/projects";
         }
     }
+
+
 
     @PostMapping("/projects/addMember/{id}")
     public String addMember(@PathVariable Long id, @RequestParam("username") String username,
@@ -322,12 +322,14 @@ public class ProjectController {
     }
 
 
+
     @GetMapping("/GET/api/v1/projectshtml")
     public String getProjectsHtml(Model model)
     {
         model.addAttribute("projectsList", projectService.getAllProjects());
         return "api_projects_list";
     }
+
 
     @PostMapping("/projects/report")
     public String generateReport(@ModelAttribute("dateConv") DateConv dateConv, HttpSession session)

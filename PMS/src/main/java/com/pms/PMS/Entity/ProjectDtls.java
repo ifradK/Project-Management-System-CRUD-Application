@@ -117,12 +117,4 @@ public class ProjectDtls {
     public void setNumberOfProjectMembers(int numberOfProjectMembers) {
         this.numberOfProjectMembers = numberOfProjectMembers;
     }
-
-//    public Set<UserDtls> getUserDtls() {
-//        return userDtls;
-//    }
-//
-//    public void setUserDtls(Set<UserDtls> userDtls) {
-//        this.userDtls = userDtls;
-//    }
 }

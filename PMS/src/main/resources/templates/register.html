@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>Registration</title>
 </head>
@@ -17,7 +18,7 @@
 
 <!--<nav class="navbar navbar-expand-lg navbar-dark bg-primary">-->
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <a class="navbar-brand" href="#">Registration</a>
+    <a class="navbar-brand" href="#"><h3>Registration</h3></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -55,21 +56,23 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <br>
+            <br>
             <h1 class="text-center">Register</h1>
             <div class="card-body">
                 <form th:action="@{/register}" th:object="${userDtls}" method="post">
                     <div class="form-group">
-                        <label for="exampleInputName1">User Name</label>
+                        <b><label for="exampleInputName1">User Name</label></b>
                         <input type="text" class="form-control" id="exampleInputName1" name="username"
                                placeholder="Enter Name">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
+                        <b><label for="exampleInputEmail1">Email address</label></b>
                         <input type="email" class="form-control" id="exampleInputEmail1" name="email"
                                placeholder="Enter email">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
+                        <b><label for="exampleInputPassword1">Password</label></b>
                         <input type="password" class="form-control" id="exampleInputPassword1" name="password"
                                placeholder="Enter Password">
                     </div>
