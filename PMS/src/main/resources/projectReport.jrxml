@@ -14,9 +14,9 @@
     </field>
     <field name="numberOfProjectMembers" class="java.lang.Integer">
     </field>
-    <field name="start" class="java.sql.Timestamp">
+    <field name="start" class="java.sql.Date">
     </field>
-    <field name="end" class="java.sql.Timestamp">
+    <field name="end" class="java.sql.Date">
     </field>
     <background>
         <band/>

@@ -47,8 +47,6 @@ public class UserController {
     public String register(@ModelAttribute UserDtls userDtls, HttpSession session)
     {
         try {
-            System.out.println("HERE");
-            System.out.println(userDtls.getUsername());
             if(userDtls.getUsername()=="" || userDtls.getEmail()=="" || userDtls.getPassword()=="")
             {
                 session.setAttribute("failuremessage", "User Could not be Registered. Fill up all the fields");

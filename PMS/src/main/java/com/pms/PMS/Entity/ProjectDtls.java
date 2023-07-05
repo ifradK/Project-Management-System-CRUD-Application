@@ -3,7 +3,8 @@ package com.pms.PMS.Entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+//import java.util.Date;
+import java.sql.Date;
 import java.util.Set;
 
 @Entity
@@ -26,11 +27,11 @@ public class ProjectDtls {
     @Column(name="status")
     private int status;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name="start")
     private Date start;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name="end")
     private Date end;
 

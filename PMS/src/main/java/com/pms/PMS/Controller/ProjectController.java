@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
 import java.util.Calendar;
-import java.util.Date;
+//import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -60,11 +61,11 @@ public class ProjectController {
     {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_MONTH, 1);
-        Date startOfMonth = cal.getTime();
+        java.sql.Date startOfMonth = new java.sql.Date(cal.getTime().getTime());
 
         int lastDateOfMonth = cal.getActualMaximum(Calendar.DATE);
         cal.set(Calendar.DAY_OF_MONTH, lastDateOfMonth);
-        Date endOfMonth = cal.getTime();
+        java.sql.Date endOfMonth = new java.sql.Date(cal.getTime().getTime());
 
         model.addAttribute("projects", projectService.getProjectsInDateRange(startOfMonth, endOfMonth));
         return "projects";

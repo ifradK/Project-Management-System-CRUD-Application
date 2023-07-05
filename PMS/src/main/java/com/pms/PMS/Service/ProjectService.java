@@ -2,7 +2,8 @@ package com.pms.PMS.Service;
 
 import com.pms.PMS.Entity.ProjectDtls;
 
-import java.util.Date;
+//import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public interface ProjectService {
