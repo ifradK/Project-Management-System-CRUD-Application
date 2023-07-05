@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -46,16 +47,26 @@ public class UserController {
     public String register(@ModelAttribute UserDtls userDtls, HttpSession session)
     {
         try {
-            userDtls.setRole("ROLE_USER");
-            userDtls.setPassword(bp.encode(userDtls.getPassword()));
+            System.out.println("HERE");
+            System.out.println(userDtls.getUsername());
+            if(userDtls.getUsername()=="" || userDtls.getEmail()=="" || userDtls.getPassword()=="")
+            {
+                session.setAttribute("failuremessage", "User Could not be Registered. Fill up all the fields");
+                return "redirect:/register";
+            }
+            else
+            {
+                userDtls.setRole("ROLE_USER");
+                userDtls.setPassword(bp.encode(userDtls.getPassword()));
 
-            userService.saveUser(userDtls);
-            session.setAttribute("successmessage", "User Successfully Registered...");
-            return "redirect:/";
+                userService.saveUser(userDtls);
+                session.setAttribute("successmessage", "User Successfully Registered...");
+                return "redirect:/register";
+            }
         }
         catch(Exception e) {
             session.setAttribute("failuremessage", "User Could not be Registered...");
-            return "redirect:/";
+            return "redirect:/register";
         }
     }
 

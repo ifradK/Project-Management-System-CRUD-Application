@@ -30,7 +30,6 @@ public class ReportService {
         List<ProjectDtls> projectDtls = projectRepository.findByStartGreaterThanEqualAndEndLessThanEqual(startDate, endDate);
 //        List<ProjectDtls> projectDtls = projectRepository.findAll();
 
-
         File file = ResourceUtils.getFile("classpath:projectReport.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(projectDtls);

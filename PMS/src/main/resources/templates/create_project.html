@@ -26,9 +26,13 @@
     </ul>
   </div>
 </nav>
-<br>
-<br>
 
+<div th:if="${session.failuremessage}"
+     th:classappend="${session.failuremessage}" class="alert alert-danger error" role="alert">
+
+  <p th:text="${session.failuremessage}"></p>
+  <th:block th:text="${#session.removeAttribute('failuremessage')}"></th:block>
+</div>
 
 <div class="container">
   <div class="row">
@@ -39,7 +43,7 @@
       <div class="card-body">
         <form th:action="@{/projects}" th:object="${project}" method="POST">
           <div class="form-group">
-            <b><label>Project Name</label></b>
+            <b><label>Project Name*</label></b>
             <input
                     type="text"
                     name = "name"
@@ -72,7 +76,7 @@
           </div>
 
           <div class="form-group">
-            <b><label>Start Date</label></b>
+            <b><label>Start Date*</label></b>
             <input
                     type="date"
                     name = "start"
@@ -83,7 +87,7 @@
           </div>
 
           <div class="form-group">
-            <b><label>End Date</label></b>
+            <b><label>End Date*</label></b>
             <input
                     type="date"
                     name = "end"

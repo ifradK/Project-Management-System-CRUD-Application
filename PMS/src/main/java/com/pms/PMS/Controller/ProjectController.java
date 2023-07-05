@@ -6,10 +6,9 @@ import com.pms.PMS.Entity.UserDtls;
 import com.pms.PMS.Service.ProjectService;
 import com.pms.PMS.Service.ReportService;
 import com.pms.PMS.Service.UserService;
+import com.pms.PMS.Service.UtilityService;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import javax.jws.WebParam;
 import javax.servlet.http.HttpSession;
 
 
@@ -33,6 +33,9 @@ public class ProjectController {
 
     @Autowired
     private ReportService reportService;
+
+    @Autowired
+    private UtilityService utilityService;
 
 
     public ProjectController(ProjectService projectService) {
@@ -73,20 +76,21 @@ public class ProjectController {
     public String saveProject(@ModelAttribute("project") ProjectDtls projectDtls, HttpSession session)
     {
         try{
-            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-            String username = "";
-            if (principal instanceof UserDetails) {
-                username = ((UserDetails)principal).getUsername();
-            } else {
-                username = principal.toString();
+            if(projectDtls.getName()=="" || projectDtls.getStart()==null || projectDtls.getEnd()==null)
+            {
+                session.setAttribute("failuremessage", "Project Could not be Added. The Required* fields cannot be empty...");
+                return "redirect:/projects/new";
             }
+            else
+            {
+                String username = utilityService.getUsernameFromSession();
 
-            projectDtls.setNumberOfProjectMembers(0);
-            projectDtls.setOwner_name(username);
-            projectService.saveProject(projectDtls);
-            session.setAttribute("successmessage", "Project Added Successfully...");
-            return "redirect:/projects";
+                projectDtls.setNumberOfProjectMembers(0);
+                projectDtls.setOwner_name(username);
+                projectService.saveProject(projectDtls);
+                session.setAttribute("successmessage", "Project Added Successfully...");
+                return "redirect:/projects";
+            }
         }catch (Exception e)
         {
             session.setAttribute("failuremessage", "Error Occurred...");
@@ -119,15 +123,7 @@ public class ProjectController {
     @GetMapping("/projects/edit/{id}")
     public String editProjectForm(@PathVariable Long id, Model model, HttpSession session)
     {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        String username = "";
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-
+        String username = utilityService.getUsernameFromSession();
         ProjectDtls projectDtls = projectService.getProjectById(id);
 
         if(username.equals(projectDtls.getOwner_name()))
@@ -149,29 +145,30 @@ public class ProjectController {
     public String updateProject(@PathVariable Long id, @ModelAttribute("project") ProjectDtls projectDtls,
                                 Model model, HttpSession session)
     {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        ProjectDtls existingProject = projectService.getProjectById(id);
+        String username = utilityService.getUsernameFromSession();
 
-        String username = "";
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-
-        if(username.equals(projectDtls.getOwner_name()))
+        if(username.equals(existingProject.getOwner_name()))
         {
             try{
-                ProjectDtls existingProject = projectService.getProjectById(id);
-                existingProject.setName(projectDtls.getName());
-                existingProject.setIntro(projectDtls.getIntro());
-                existingProject.setStatus(projectDtls.getStatus());
-                existingProject.setStart(projectDtls.getStart());
-                existingProject.setEnd(projectDtls.getEnd());
-                existingProject.setNumberOfProjectMembers(projectDtls.getNumberOfProjectMembers());
+                if(projectDtls.getName()=="" || projectDtls.getStart()==null || projectDtls.getEnd()==null)
+                {
+                    session.setAttribute("failuremessage", "Project Could not be Updated. The Required* fields cannot be empty...");
+                    return "redirect:/projects";
+                }
+                else
+                {
+                    existingProject.setName(projectDtls.getName());
+                    existingProject.setIntro(projectDtls.getIntro());
+                    existingProject.setStatus(projectDtls.getStatus());
+                    existingProject.setStart(projectDtls.getStart());
+                    existingProject.setEnd(projectDtls.getEnd());
+                    existingProject.setNumberOfProjectMembers(projectDtls.getNumberOfProjectMembers());
 
-                projectService.updateProject(existingProject);
-                session.setAttribute("successmessage", "Project Updated Successfully...");
-                return "redirect:/projects";
+                    projectService.updateProject(existingProject);
+                    session.setAttribute("successmessage", "Project Updated Successfully...");
+                    return "redirect:/projects";
+                }
             }catch (Exception e)
             {
                 session.setAttribute("failuremessage", "Error Occurred...");
@@ -191,15 +188,7 @@ public class ProjectController {
     @GetMapping("/projects/delete/{id}")
     public String deleteProject(@PathVariable Long id, HttpSession session){
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        String username = "";
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-
+        String username = utilityService.getUsernameFromSession();
         ProjectDtls projectDtls = projectService.getProjectById(id);
 
         if(username.equals(projectDtls.getOwner_name()))
@@ -227,15 +216,7 @@ public class ProjectController {
     @GetMapping("/projects/addMember/{id}")
     public String addMemberForm(@PathVariable Long id, Model model, HttpSession session)
     {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        String username = "";
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails)principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-
+        String username = utilityService.getUsernameFromSession();
         UserDtls userDtls = userService.getUserByUsername(username);
         ProjectDtls projectDtls = projectService.getProjectById(id);
         List<UserDtls> userDtlsSet = userService.getMembersByProject(id);
@@ -259,6 +240,11 @@ public class ProjectController {
     public String addMember(@PathVariable Long id, @RequestParam("username") String username,
                             Model model, HttpSession session)
     {
+        if(username=="")
+        {
+            session.setAttribute("failuremessage", "Username is Required...");
+            return "redirect:/projects";
+        }
         UserDtls userDtls = userService.getUserByUsername(username);
         ProjectDtls projectDtls = projectService.getProjectById(id);
         List<UserDtls> userDtlsSet = userService.getMembersByProject(id);
