@@ -12,11 +12,23 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            // console.log(document.getElementById('form1').baseURI);
+            const url = document.getElementById('form1').baseURI;
+            var revid = "";
+            var id = "";
+            for (let i=url.length-1; i>=0; i--)
+            {
+                if(url[i]=='/'){break;}
+                revid = revid+url[i];
+            }
+            for (let i = revid.length - 1; i >= 0; i--) {
+                id += revid[i];
+            }
+            var src = "/GET/api/users/" + id
+            console.log(src);
             $("#user_names").autocomplete({
                 // source: ["a","aa","aaa","b","bb","bbb","c"],
-                // source: kk,
-                source: "/GET/api/users/",
+                // source: "/GET/api/users/",
+                source: src,
                 minLength: 1
             });
 
@@ -53,7 +65,7 @@
             <br>
             <h1 class="text-center">Add New Member</h1>
             <div class="card-body">
-                <form th:action="@{/projects/addMember/{id}(id=${project.id})}" method="POST">
+                <form id="form1" th:action="@{/projects/addMember/{id}(id=${project.id})}" method="POST">
                     <div class="form-group">
                         <b><label>UserName</label></b>
                         <input

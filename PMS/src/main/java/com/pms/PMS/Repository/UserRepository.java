@@ -14,4 +14,10 @@ public interface UserRepository extends JpaRepository<UserDtls, Integer> {
 
     @Query("select username from UserDtls")
     public List<String> getAllUsernames();
+
+
 }
+
+//@Query("select username from UserDtls,ProjectDtls where userDtls.id")
+//    @Query("SELECT u FROM User u WHERE u.status = ?1 and u.name = ?2")
+//    User findUserByStatusAndName(Integer status, String name);

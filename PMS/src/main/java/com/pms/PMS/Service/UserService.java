@@ -11,5 +11,5 @@ public interface UserService {
 
     List<UserDtls> getMembersByProject(Long id);
 
-    List<String> getAllUsernames();
+    List<String> getAllUsernames(Long id);
 }

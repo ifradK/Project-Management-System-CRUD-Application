@@ -7,10 +7,7 @@ import com.pms.PMS.Service.UserService;
 import javafx.application.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -32,10 +29,10 @@ public class ApiController {
         return projectService.getAllProjects();
     }
 
-    @GetMapping("/GET/api/users")
-    public List<String> getUserNames()
+    @GetMapping("/GET/api/users/{id}")
+    public List<String> getUserNames(@PathVariable Long id)
     {
-        return userService.getAllUsernames();
+        return userService.getAllUsernames(id);
     }
 }
 

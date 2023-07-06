@@ -5,6 +5,7 @@ import com.pms.PMS.Repository.UserRepository;
 import com.pms.PMS.Service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,9 +34,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<String> getAllUsernames() {
+    public List<String> getAllUsernames(Long id) {
 //        List<String> allList = userRepository.getAllUsernames();
 //        List<UserDtls> memberList = userRepository.findUserDtlsByProjectDtlsId(id);
+//        List<String> returnList = new ArrayList<>();
+
         return userRepository.getAllUsernames();
     }
 
