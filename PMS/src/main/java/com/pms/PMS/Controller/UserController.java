@@ -69,11 +69,17 @@ public class UserController {
     }
 
 
-    //    @GetMapping("/login")
-//    public String login()
-//    {
-//        return "login";
-//    }
+    @GetMapping("/login")
+    public String login()
+    {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String dologin()
+    {
+        return "projects";
+    }
 
 //    @PostMapping("/dologin")
 //    public void dologin(@ModelAttribute UserDtls u, HttpSession session)

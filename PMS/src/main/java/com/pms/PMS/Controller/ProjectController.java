@@ -86,6 +86,22 @@ public class ProjectController {
             {
                 String username = utilityService.getUsernameFromSession();
 
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.HOUR_OF_DAY, 0);
+                java.sql.Date todayDate = new java.sql.Date(cal.getTime().getTime());
+
+                if(todayDate.before(projectDtls.getStart()) && todayDate.before(projectDtls.getEnd())){
+                    projectDtls.setStatus("Pre");
+                }
+                else if(todayDate.after(projectDtls.getEnd()) && todayDate.after(projectDtls.getStart()))
+                {
+                    projectDtls.setStatus("End");
+                }
+                else if(todayDate.after(projectDtls.getStart()) && todayDate.before(projectDtls.getEnd()))
+                {
+                    projectDtls.setStatus("Start");
+                }
+
                 projectDtls.setNumberOfProjectMembers(0);
                 projectDtls.setOwner_name(username);
                 projectService.saveProject(projectDtls);
@@ -94,7 +110,7 @@ public class ProjectController {
             }
         }catch (Exception e)
         {
-            session.setAttribute("failuremessage", "Error Occurred...");
+            session.setAttribute("failuremessage", "Error Occurred. Project Could not be Added.");
             return "redirect:/projects";
         }
     }
@@ -159,9 +175,25 @@ public class ProjectController {
                 }
                 else
                 {
+                    Calendar cal = Calendar.getInstance();
+                    cal.set(Calendar.HOUR_OF_DAY, 0);
+                    java.sql.Date todayDate = new java.sql.Date(cal.getTime().getTime());
+
+                    if(todayDate.before(projectDtls.getStart()) && todayDate.before(projectDtls.getEnd()))
+                    {
+                        existingProject.setStatus("Pre");
+                    }
+                    else if(todayDate.after(projectDtls.getEnd()) && todayDate.after(projectDtls.getStart()))
+                    {
+                        existingProject.setStatus("End");
+                    }
+                    else if(todayDate.after(projectDtls.getStart()) && todayDate.before(projectDtls.getEnd()))
+                    {
+                        existingProject.setStatus("Start");
+                    }
+
                     existingProject.setName(projectDtls.getName());
                     existingProject.setIntro(projectDtls.getIntro());
-                    existingProject.setStatus(projectDtls.getStatus());
                     existingProject.setStart(projectDtls.getStart());
                     existingProject.setEnd(projectDtls.getEnd());
                     existingProject.setNumberOfProjectMembers(projectDtls.getNumberOfProjectMembers());
@@ -172,7 +204,7 @@ public class ProjectController {
                 }
             }catch (Exception e)
             {
-                session.setAttribute("failuremessage", "Error Occurred...");
+                session.setAttribute("failuremessage", "Error Occurred. Project Could not be Updated.");
                 return "redirect:/projects";
             }
         }
@@ -200,7 +232,7 @@ public class ProjectController {
                 return "redirect:/projects";
             }catch (Exception e)
             {
-                session.setAttribute("failuremessage", "Error Occurred...");
+                session.setAttribute("failuremessage", "Error Occurred. Project Could not be Deleted.");
                 return "redirect:/projects";
             }
         }
@@ -278,7 +310,7 @@ public class ProjectController {
                 return "redirect:/projects";
             }catch (Exception e)
             {
-                session.setAttribute("failuremessage", "Error Occurred...");
+                session.setAttribute("failuremessage", "Error Occurred. Member Could not be Added.");
                 return "redirect:/projects";
             }
         }

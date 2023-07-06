@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pms.PMS.Entity.ProjectDtls;
 import com.pms.PMS.Service.ProjectService;
 import com.pms.PMS.Service.UserService;
+import javafx.application.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class ApiController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/GET/api/v1/projects")
+    @GetMapping(value = "/GET/api/v1/projects", produces = "application/json")
     public List<ProjectDtls> getProjects()
     {
         return projectService.getAllProjects();

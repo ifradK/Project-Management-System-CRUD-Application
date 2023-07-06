@@ -10,17 +10,18 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<!--    <script type="text/javascript">-->
-<!--        $(document).ready(function() {-->
-<!--            $("#user_names").autocomplete({-->
-<!--                source: ["a","aa","aaa","b","bb","bbb","c"],-->
-<!--                // source: list,-->
-<!--                // source: "/GET/api/users",-->
-<!--                minLength: 1-->
-<!--            });-->
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // console.log(document.getElementById('form1').baseURI);
+            $("#user_names").autocomplete({
+                // source: ["a","aa","aaa","b","bb","bbb","c"],
+                // source: kk,
+                source: "/GET/api/users/",
+                minLength: 1
+            });
 
-<!--        });-->
-<!--    </script>-->
+        });
+    </script>
 
 </head>
 <body>

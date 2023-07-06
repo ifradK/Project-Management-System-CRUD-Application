@@ -25,7 +25,7 @@ public class ProjectDtls {
     private String owner_name;
 
     @Column(name="status")
-    private int status;
+    private String status;
 
 //    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column(name="start")
@@ -44,7 +44,7 @@ public class ProjectDtls {
     public ProjectDtls() {
     }
 
-    public ProjectDtls(Long id, String name, String intro, String owner_name, int status, Date start, Date end, int numberOfProjectMembers) {
+    public ProjectDtls(Long id, String name, String intro, String owner_name, String status, Date start, Date end, int numberOfProjectMembers) {
         this.id = id;
         this.name = name;
         this.intro = intro;
@@ -87,11 +87,11 @@ public class ProjectDtls {
         this.owner_name = owner_name;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
