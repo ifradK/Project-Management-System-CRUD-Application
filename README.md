@@ -3,14 +3,15 @@ This is a CRUD application developed using Java Spring Boot as backend, Thymelea
 
 &nbsp;
 
-<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/39241dd8-d193-47b7-acff-7c2d7d1681cc" width="80%">
-<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/b599992f-d105-4589-b4f2-2693416f641e" width="80%">
-<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/87dba771-a88d-42d1-a1bb-b0bf286a2851" width="80%">
-<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/b578510c-c6be-42b1-a4f3-b8b96e39e319" width="80%">
-<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/e4174102-d9b3-4aac-b5dc-32fc8eef4e9b" width="80%">
-<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/97226220-5f64-400f-aaf3-ab9ae2a36f5c" width="80%">
-<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/172bf58e-888e-4c41-8e20-2c08bbd9927a" width="80%">
-<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/5e0c5948-6c8f-4893-aff3-b5fa64f50c64" width="80%">
+<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/277f4065-06df-477b-ad97-d4186e5a81e6" width="80%">
+<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/dcaab709-3f71-4787-87f5-efa6eb967ffa" width="80%">
+<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/f02b1b64-65c7-40e7-8e55-42c7bf306148" width="80%">
+<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/ea6bd75e-3fb5-414c-88d7-2462948f0065" width="80%">
+<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/b70536e8-daea-448c-8bb8-869eebfb416f" width="80%">
+<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/e57eea96-5c39-4570-8a75-bf8ed28c95e9" width="80%">
+<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/488234ab-a51f-4f2b-a620-ef14db578279" width="80%">
+<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/20b0ce63-a7a2-44eb-b34b-a2fee324d20b" width="80%">
+<img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/cdf81b0c-0d9f-4c73-a352-76a56db878b3" width="80%">
 <img src="https://github.com/ifradK/Project-Management-System-CRUD-Application/assets/55544024/aa5eb71c-c92d-4b1e-a80c-84cb3b0002d0" width="80%">
 
 
