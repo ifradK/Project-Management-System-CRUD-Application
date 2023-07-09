@@ -138,6 +138,7 @@ public class ProjectController {
     public String viewProject(@PathVariable Long id, Model model)
     {
         model.addAttribute("project", projectService.getProjectById(id));
+        model.addAttribute("members", userService.getMembersByProject(id));
         return "view_project";
     }
 

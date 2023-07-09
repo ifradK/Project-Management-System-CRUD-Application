@@ -67,6 +67,14 @@
                         <p th:text="${project.numberOfProjectMembers}"></p>
                     </div>
                 </div>
+                <label><h4>Member Names -</h4></label>
+                <table class="table table-striped table-bordered">
+                    <tbody>
+                    <tr th:each="member: ${members}">
+                        <td th:text="${member.username}"></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
