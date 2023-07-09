@@ -67,6 +67,7 @@ public class ProjectController {
         cal.set(Calendar.DAY_OF_MONTH, lastDateOfMonth);
         java.sql.Date endOfMonth = new java.sql.Date(cal.getTime().getTime());
 
+        model.addAttribute("username", utilityService.getUsernameFromSession());
         model.addAttribute("projects", projectService.getProjectsInDateRange(startOfMonth, endOfMonth));
         return "projects";
     }
@@ -80,6 +81,11 @@ public class ProjectController {
             if(projectDtls.getName()=="" || projectDtls.getStart()==null || projectDtls.getEnd()==null)
             {
                 session.setAttribute("failuremessage", "Project Could not be Added. The Required* fields cannot be empty...");
+                return "redirect:/projects/new";
+            }
+            else if(projectDtls.getStart().after(projectDtls.getEnd()))
+            {
+                session.setAttribute("failuremessage", "Start Date cannot be after End Date...");
                 return "redirect:/projects/new";
             }
             else
@@ -171,6 +177,11 @@ public class ProjectController {
                 if(projectDtls.getName()=="" || projectDtls.getStart()==null || projectDtls.getEnd()==null)
                 {
                     session.setAttribute("failuremessage", "Project Could not be Updated. The Required* fields cannot be empty...");
+                    return "redirect:/projects";
+                }
+                else if(projectDtls.getStart().after(projectDtls.getEnd()))
+                {
+                    session.setAttribute("failuremessage", "Start Date cannot be after End Date...");
                     return "redirect:/projects";
                 }
                 else
