@@ -1,5 +1,5 @@
 # Project-Management-System-CRUD-Application
-This is a CRUD application developed using Java Spring Boot as backend, Thymeleaf as frontend, and MySQL for the database.
+This is a CRUD web application developed using Java Spring Boot as backend, Thymeleaf as frontend, and MySQL for the database.
 
 &nbsp;
 
